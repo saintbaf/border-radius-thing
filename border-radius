@@ -1,0 +1,51 @@
+<!-- Border Radius Thingy -->
+<section class="playground-border-radius mrg-pv5 pgd-pv5">
+
+  	<div class="container vh-flex-center">
+    		<div class="col lg-12 md-12 sm-12 relative holder flex-wrap vh100 vh-flex-center">
+    			 <div class="bg-black square absolute borderRadius overflow-hidden"></div>
+    		</div>
+  	</div>
+
+    <style>  
+        .borderRadius { 
+            width: 50%; 
+            border-radius: 50%; 
+            transition: border-radius 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
+            box-shadow: 0px 0px 50px 75px rgba(195, 62, 52, 0);
+            animation: pulse 2s  infinite ease-out; 
+        }
+        .holder { transition: all 0.3s linear; }
+        @keyframes pulse {
+            0%   { box-shadow: 0 0 50px 75px  rgba(195, 62, 52, 0.5); }
+            70%  { box-shadow: 0 0 50px 150px rgba(165, 42, 42, 0); }
+            100% { box-shadow: 0 0 50px 75px  rgba(135, 22, 32, 0); }
+        }
+    </style>
+
+    <script>
+        const linGradEl = document.querySelector('.linearGradient'); 
+        const holder = document.querySelector('.holder');
+        let holderW = holder.offsetWidth; 
+        let screenWidth = window.screen.width;
+        let abRadiusElements = document.querySelectorAll('.borderRadius');
+
+        abRadiusElements.forEach(bRadiusEl => {
+            window.setInterval(function(){
+                randomizeBorderRadius();
+            }, 700);
+        });
+
+        function randomizeBorderRadius() { 
+            const min = 55, max = 85;    
+            let randoms = [...Array(8)].map(() => (Math.random() * (max - min) + min));
+            let RH_Top_Left = randoms[0], RH_Top_Right = randoms[1], RH_Bot_Right = randoms[2], RH_Bot_Left = randoms[3];
+            let RV_Top_Left = randoms[4], RV_Top_Right = randoms[5], RV_Bot_Right = randoms[6], RV_Bot_Left = randoms[7];
+            abRadiusElements.forEach(bRadiusEl => {
+                bRadiusEl.style.borderRadius = `${RH_Top_Left}% ${RH_Top_Right}% ${RH_Bot_Right}% ${RH_Bot_Left}% / ${RV_Top_Left}% ${RV_Top_Right}% ${RV_Bot_Right}% ${RV_Bot_Left}%`;  
+            });
+            //console.log(randoms);      
+        }
+    </script>
+
+</section>
